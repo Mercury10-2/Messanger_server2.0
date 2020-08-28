@@ -1,4 +1,4 @@
-package server_2.messanger.controller;
+package server_2.messanger.controller.users;
 
 import java.util.List;
 
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import server_2.messanger.dto.UserDto;
-import server_2.messanger.service.UserService;
+import server_2.messanger.service.users.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("users")
 @CrossOrigin(origins = { "http://localhost:8081" })
 public class UserController {
 
-    private final UserService service;
+    private final UserServiceImpl service;
 
-    public UserController(UserService service) {
+    public UserController(UserServiceImpl service) {
         this.service = service;
         service.generateUsers();
     }
@@ -31,21 +31,21 @@ public class UserController {
     }
 
     @GetMapping("{name}")
-    public ResponseEntity<UserDto> getUser(@PathVariable(name = "name") String name) {
+    public ResponseEntity<UserDto> getUser(@PathVariable(name = "name") String name) {  //  HttpStatus.NO-CONTENT (203 error)??
         return service.getUser(name);
     }
 
     @GetMapping("{name}/{password}")
-    public ResponseEntity<UserDto> verifyPassword(  @PathVariable(name = "name") String name,
+    public ResponseEntity<UserDto> login(  @PathVariable(name = "name") String name,
                                                     @PathVariable(name = "password") String password) {
-        return service.verifyPassword(name, password);
+        return service.login(name, password);
     }
     
     @PostMapping("{name}/{password}/{gender}/{email}")                  //  Попробовать map извлекать из Json?
-    public ResponseEntity<UserDto> registration(@PathVariable(name = "name") String name,
+    public ResponseEntity<UserDto> register(@PathVariable(name = "name") String name,
                                                 @PathVariable(name = "password") String password,
                                                 @PathVariable(name = "gender") String gender,
                                                 @PathVariable(name = "email") String email) {
-        return service.registration(name, password, gender, email);
+        return service.register(name, password, gender, email);
     }
 }

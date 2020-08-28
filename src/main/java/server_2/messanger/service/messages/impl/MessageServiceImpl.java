@@ -1,4 +1,4 @@
-package server_2.messanger.service;
+package server_2.messanger.service.messages.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import server_2.messanger.domain.messages.Message;
 import server_2.messanger.repository.MessageRepository;
+import server_2.messanger.service.messages.MessageService;
 
 @Service
-public class MessageService {
+public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
 
-    public MessageService(MessageRepository messageRepository) {
+    public MessageServiceImpl(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 

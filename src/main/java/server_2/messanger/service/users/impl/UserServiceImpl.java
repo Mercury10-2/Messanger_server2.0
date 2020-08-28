@@ -1,12 +1,12 @@
-package server_2.messanger.service;
+package server_2.messanger.service.users.impl;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import server_2.messanger.domain.users.Role;
@@ -15,14 +15,17 @@ import server_2.messanger.domain.users.User;
 import server_2.messanger.domain.users.Gender;
 import server_2.messanger.dto.UserDto;
 import server_2.messanger.repository.UserRepository;
+import server_2.messanger.service.users.UserService;
 
 @Service
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public ResponseEntity<UserDto> getUser(String name) {
@@ -35,7 +38,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<UserDto> verifyPassword(String name, String password) {
+    public ResponseEntity<UserDto> login(String name, String password) {
         User user = getUserFromDb(name);
         if (user == null)
             return sendError("name");
@@ -44,14 +47,14 @@ public class UserService {
         return getResponseDto(user);
     }
 
-    public ResponseEntity<UserDto> registration(String name, String password, String gender, String email) {
+    public ResponseEntity<UserDto> register(String name, String password, String gender, String email) {
         User user = getUserFromDb(name);
         if (user != null)
             return sendError("exists");
         else {
             user = new User();
             user.setName(name);
-            user.setPassword(password);
+            user.setPassword(passwordEncoder.encode(password));
             user.setGender(gender.equals("мужчина") ? Gender.MALE : Gender.FEMALE);
             user.setRole(Role.USER);
             user.setStatus(Status.ACTIVE);

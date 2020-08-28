@@ -1,11 +1,11 @@
-package server_2.messanger.controller;
+package server_2.messanger.controller.messages;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.*;
 
 import server_2.messanger.domain.messages.Message;
 import server_2.messanger.domain.messages.Views;
-import server_2.messanger.service.MessageService;
+import server_2.messanger.service.messages.impl.MessageServiceImpl;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import java.util.List;
 @CrossOrigin(origins = { "http://localhost:8081" })
 public class MessageController {
 
-    private final MessageService service;
+    private final MessageServiceImpl service;
 
-    public MessageController(MessageService service) {
+    public MessageController(MessageServiceImpl service) {
         this.service = service;
     }
 

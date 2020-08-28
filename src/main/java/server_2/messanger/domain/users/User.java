@@ -4,10 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import server_2.messanger.domain.BaseEntity;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -39,7 +34,7 @@ public class User extends BaseEntity {
     @Column(name = "status")
     private Status status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")          //  userpic??
     private LocalDateTime lastVisit;
 
     @Column(name = "email")
