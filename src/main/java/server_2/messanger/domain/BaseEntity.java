@@ -1,7 +1,6 @@
 package server_2.messanger.domain;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -25,11 +24,6 @@ public class BaseEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime created;
 
-    @LastModifiedDate
-    @Column(name = "updated")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime updated;
-
     public BaseEntity() {
     }
 
@@ -47,13 +41,5 @@ public class BaseEntity {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
-    }
-
-    public LocalDateTime getUpdated() {
-        return this.updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
     }
 }

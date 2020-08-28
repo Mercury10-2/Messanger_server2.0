@@ -22,7 +22,12 @@ public class Message {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonView(Views.FullMessage.class)
     private LocalDateTime creationDate;
-
+/*
+    @LastModifiedDate
+    @Column(name = "updated")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    private LocalDateTime updated;
+*/
     public Message() {
     }
 

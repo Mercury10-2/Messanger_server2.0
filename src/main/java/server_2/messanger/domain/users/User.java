@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import server_2.messanger.domain.BaseEntity;
-import server_2.messanger.domain.users.enums.Gender;
-import server_2.messanger.domain.users.enums.Status;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,12 +27,13 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
-    private String email;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "gender")
     private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -43,11 +42,8 @@ public class User extends BaseEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime lastVisit;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private List<Role> roles;
+    @Column(name = "email")
+    private String email;
 
     public User() {
     }
@@ -100,11 +96,12 @@ public class User extends BaseEntity {
         this.lastVisit = lastVisit;
     }
 
-    public List<Role> getRoles() {
-        return this.roles;
+    public Role getRole() {
+        return this.role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
+
 }
