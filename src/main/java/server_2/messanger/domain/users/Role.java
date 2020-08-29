@@ -6,9 +6,9 @@ public enum Role {
     @Override
     public String toString() {
         switch(this) {
-            case USER: return "пользователь";
             case MODER: return "модератор";
-            default: return "администратор";
+            case ADMIN: return "администратор";
+            default: return "пользователь";
         }
     }
 }

@@ -28,8 +28,12 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public ResponseEntity<UserDto> getUser(String name) {
-        return getResponseDto(getUserFromDb(name));
+    public User getUser(String name) {
+        return userRepository.findByName(name);
+    }
+
+    public ResponseEntity<UserDto> getUserDto(String name) {
+        return getResponseDto(getUser(name));
     }
 
     public List<UserDto> getUsers() {
@@ -39,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public ResponseEntity<UserDto> login(String name, String password) {
-        User user = getUserFromDb(name);
+        User user = getUser(name);
         if (user == null)
             return sendError("name");
         if (!user.getPassword().equals(password))
@@ -48,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public ResponseEntity<UserDto> register(String name, String password, String gender, String email) {
-        User user = getUserFromDb(name);
+        User user = getUser(name);
         if (user != null)
             return sendError("exists");
         else {
@@ -83,10 +87,6 @@ public class UserServiceImpl implements UserService {
 
     private ResponseEntity<UserDto> sendError(String error) {
         return new ResponseEntity<UserDto>(new UserDto(error), HttpStatus.OK);
-    }
-
-    private User getUserFromDb(String name) {
-        return userRepository.findByName(name);
     }
 
     private List<User> getUserList() {

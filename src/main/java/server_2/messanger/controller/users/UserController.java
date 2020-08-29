@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping("{name}")
     public ResponseEntity<UserDto> getUser(@PathVariable(name = "name") String name) {  //  HttpStatus.NO-CONTENT (203 error)??
-        return service.getUser(name);
+        return service.getUserDto(name);
     }
 
     @GetMapping("{name}/{password}")

@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import server_2.messanger.domain.users.User;
 import server_2.messanger.dto.UserDto;
 
 public interface UserService {
     
-    ResponseEntity<UserDto> getUser(String name);
+    User getUser(String name);
+
+    ResponseEntity<UserDto> getUserDto(String name);
 
     List<UserDto> getUsers();
 
