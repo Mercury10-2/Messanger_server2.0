@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import server_2.messanger.security.jwt.JwtTokenProvider;
 import server_2.messanger.service.users.UserService;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("login")
 @CrossOrigin(origins = { "http://localhost:8081" })
 public class AuthenticationController {
     
@@ -35,7 +37,7 @@ public class AuthenticationController {
         this.service = service;
     }
 
-    @PostMapping("login")
+    @PostMapping        //  Возвращает токен, но нужно с ним авторизоваться
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             String username = requestDto.getName();

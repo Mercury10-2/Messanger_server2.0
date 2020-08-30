@@ -8,6 +8,11 @@ public class AuthenticationRequestDto {
     public AuthenticationRequestDto() {
     }
 
+    public AuthenticationRequestDto(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
     public String getName() {
         return this.name;
     }

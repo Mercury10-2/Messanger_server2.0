@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
         if (getUsers().isEmpty()) {
             User user = new User();
             user.setName("Юля");
-            user.setPassword("Юля");
+            user.setPassword(new BCryptPasswordEncoder().encode("Юля"));
             user.setGender(Gender.FEMALE);
             user.setRole(Role.USER);
             user.setStatus(Status.ACTIVE);
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
             user = new User();
             user.setName("Женя");
-            user.setPassword("Женя");
+            user.setPassword(new BCryptPasswordEncoder().encode("Женя"));
             user.setGender(Gender.FEMALE);
             user.setRole(Role.MODER);
             user.setStatus(Status.ACTIVE);
@@ -119,7 +119,7 @@ public class UserServiceImpl implements UserService {
 
             user = new User();
             user.setName("Аня");
-            user.setPassword("Аня");
+            user.setPassword(new BCryptPasswordEncoder().encode("Аня"));
             user.setGender(Gender.FEMALE);
             user.setRole(Role.ADMIN);
             user.setStatus(Status.ACTIVE);

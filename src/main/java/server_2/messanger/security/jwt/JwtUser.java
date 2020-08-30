@@ -78,12 +78,10 @@ public class JwtUser implements UserDetails {
         return enabled;
     }
 
-    @JsonIgnore
     public LocalDateTime getLastVisit() {
         return lastVisit;
     }
 
-    @JsonIgnore
     public String getGender() {
         return gender;
     }

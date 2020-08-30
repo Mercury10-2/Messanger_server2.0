@@ -36,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping("{name}/{password}")
-    public ResponseEntity<UserDto> login(  @PathVariable(name = "name") String name,
-                                                    @PathVariable(name = "password") String password) {
+    public ResponseEntity<UserDto> login(   @PathVariable(name = "name") String name,
+                                            @PathVariable(name = "password") String password) {
         return service.login(name, password);
     }
     
