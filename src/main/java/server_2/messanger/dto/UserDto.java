@@ -10,7 +10,7 @@ import server_2.messanger.domain.users.Role;
 import server_2.messanger.domain.users.Status;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserDto {
+public class UserDto {/*
 
     private Long id;
     private String name;
@@ -22,28 +22,26 @@ public class UserDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime created;
     private String email;
-    private boolean verified;
-    private String error;
+    private String token;
 
     public UserDto() {
     }
 
     public UserDto(Long id, String name, Gender gender, Role role, Status status,
-                    LocalDateTime lastVisit, LocalDateTime created, String email) {
+                    LocalDateTime lastVisit, LocalDateTime created, String email, String token) {
         this.id = id;
         this.name = name;
-        this.gender = gender.toString();
-        this.role = role.toString();
-        this.status = status.toString();
+        this.gender = gender.name();
+        this.role = role.name();
+        this.status = status.name();
         this.lastVisit = lastVisit;
         this.created = created;
         this.email = email;
-        this.verified = true;
+        this.token = token;
     }
 
     public UserDto(String error) {
-        this.verified = false;
-        this.error = error;
+        this.token = "error";
     }
 
     public Long getId() {
@@ -110,23 +108,11 @@ public class UserDto {
         this.email = email;
     }
 
-    public boolean isVerified() {
-        return this.verified;
+    public String getToken() {
+        return this.token;
     }
 
-    public boolean getVerified() {
-        return this.verified;
-    }
-
-    public void setVerified(boolean verified) {
-        this.verified = verified;
-    }
-
-    public String getError() {
-        return this.error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
+    public void setToken(String token) {
+        this.token = token;
+    }*/
 }

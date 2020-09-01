@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class UserController {
 
     public UserController(UserServiceImpl service) {
         this.service = service;
-        service.generateUsers();
+        //service.generateUsers();
     }
 
     @GetMapping
@@ -47,5 +48,10 @@ public class UserController {
                                                 @PathVariable(name = "gender") String gender,
                                                 @PathVariable(name = "email") String email) {
         return service.register(name, password, gender, email);
+    }
+
+    @DeleteMapping
+    public void deleteAllUsers() {
+        service.deleteAllUsers();
     }
 }

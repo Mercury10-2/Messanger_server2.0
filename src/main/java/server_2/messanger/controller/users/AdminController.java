@@ -2,6 +2,7 @@ package server_2.messanger.controller.users;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +25,10 @@ public class AdminController {
     @PutMapping(value = "{id}")
     public ResponseEntity<UserDto> changeRole(@PathVariable(name = "id") Long id) {
         return service.changeRole(id);
+    }
+
+    @GetMapping
+    public String greeting() {
+        return "Hi!";
     }
 }
