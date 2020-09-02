@@ -19,7 +19,7 @@ import server_2.messanger.service.users.UserService;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = { "http://localhost:8081" }, maxAge = 3600)		//	Check functionality after refactoring
+@CrossOrigin(origins = { "http://localhost:8081" }, maxAge = 3600)
 public class AuthenticationController {
 
 	private final UserService service;

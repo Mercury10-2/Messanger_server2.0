@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import server_2.messanger.dto.UserDto;
+import server_2.messanger.domain.users.User;
 import server_2.messanger.service.users.impl.AdminServiceImpl;
 
 @RestController
@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @PutMapping(value = "{id}")
-    public ResponseEntity<UserDto> changeRole(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<User> changeRole(@PathVariable(name = "id") Long id) {
         return service.changeRole(id);
     }
 

@@ -3,6 +3,7 @@ package server_2.messanger.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class LoginRequest {
+	
 	@NotBlank
 	private String username;
 

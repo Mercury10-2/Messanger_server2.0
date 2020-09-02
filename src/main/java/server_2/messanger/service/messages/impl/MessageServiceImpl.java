@@ -19,25 +19,30 @@ public class MessageServiceImpl implements MessageService {
         this.messageRepository = messageRepository;
     }
 
+    @Override
     public List<Message> getMessages() {
         return messageRepository.findAll();
     }
 
+    @Override
     public Message getMessage(Long id) {
         return messageRepository.findById(id).get();
     }
 
+    @Override
     public Message create(Message message) {
         message.setCreationDate(LocalDateTime.now());
         return messageRepository.save(message);
     }
 
+    @Override
     public Message update(Long id, Message message) {
         Message messageFromDb = getMessage(id);
         BeanUtils.copyProperties(message, messageFromDb, "id");
         return messageRepository.save(messageFromDb);
     }
 
+    @Override
     public void delete(Long id) {
         messageRepository.deleteById(id);
     }

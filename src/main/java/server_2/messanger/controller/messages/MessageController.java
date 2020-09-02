@@ -1,11 +1,13 @@
 package server_2.messanger.controller.messages;
 
 import com.fasterxml.jackson.annotation.JsonView;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import server_2.messanger.domain.messages.Message;
 import server_2.messanger.domain.messages.Views;
-import server_2.messanger.service.messages.impl.MessageServiceImpl;
+import server_2.messanger.service.messages.MessageService;
 
 import java.util.List;
 
@@ -14,9 +16,9 @@ import java.util.List;
 @CrossOrigin(origins = { "http://localhost:8081" })
 public class MessageController {
 
-    private final MessageServiceImpl service;
+    private final MessageService service;
 
-    public MessageController(MessageServiceImpl service) {
+    public MessageController(MessageService service) {
         this.service = service;
     }
 
@@ -32,17 +34,20 @@ public class MessageController {
         return service.getMessage(id);
     }
 
-    @PostMapping
+    @PostMapping("/auth")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public Message create(@RequestBody Message message) {
         return service.create(message);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/auth/{id}")
+	@PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public Message update(@PathVariable("id") Long id, @RequestBody Message message) {
         return service.update(id, message);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/auth/mod/{id}")
+	@PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
     public void delete(@PathVariable("id") Long id) {
         service.delete(id);
     }

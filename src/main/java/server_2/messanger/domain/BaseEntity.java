@@ -24,8 +24,7 @@ public class BaseEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime created;
 
-    public BaseEntity() {
-    }
+    public BaseEntity() {}
 
     public Long getId() {
         return this.id;

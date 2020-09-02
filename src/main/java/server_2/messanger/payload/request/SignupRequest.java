@@ -14,41 +14,55 @@ public class SignupRequest {
     @Email
     private String email;
     
-    private Set<String> role;
-    
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
-  
+
+    private Set<String> role;
+
+    @NotBlank
+    private String gender;
+
+    public SignupRequest() {}
+
+
     public String getUsername() {
-        return username;
+        return this.username;
     }
- 
+
     public void setUsername(String username) {
         this.username = username;
     }
- 
+
     public String getEmail() {
-        return email;
+        return this.email;
     }
- 
+
     public void setEmail(String email) {
         this.email = email;
     }
- 
+
     public String getPassword() {
-        return password;
+        return this.password;
     }
- 
+
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public Set<String> getRole() {
-      return this.role;
+        return this.role;
     }
-    
+
     public void setRole(Set<String> role) {
-      this.role = role;
+        this.role = role;
+    }
+
+    public String getGender() {
+        return this.gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }

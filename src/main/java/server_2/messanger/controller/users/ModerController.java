@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import server_2.messanger.dto.MessageDto;
+import server_2.messanger.domain.messages.Message;
 import server_2.messanger.service.users.impl.ModerServiceImpl;
 
 @RestController
@@ -24,7 +24,7 @@ public class ModerController {
     }
 
     @PostMapping(value = "{id}")
-    public ResponseEntity<MessageDto> updateMessage(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Message> updateMessage(@PathVariable(name = "id") Long id) {
         return service.updateMessage(id);
     }
 

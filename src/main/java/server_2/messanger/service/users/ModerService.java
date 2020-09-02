@@ -2,11 +2,11 @@ package server_2.messanger.service.users;
 
 import org.springframework.http.ResponseEntity;
 
-import server_2.messanger.dto.MessageDto;
+import server_2.messanger.domain.messages.Message;
 
 public interface ModerService {
     
-    ResponseEntity<MessageDto> updateMessage(Long id);
+    ResponseEntity<Message> updateMessage(Long id);
 
     ResponseEntity<Void> deleteMessage(Long id);
 
