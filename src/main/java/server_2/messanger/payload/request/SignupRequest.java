@@ -25,6 +25,12 @@ public class SignupRequest {
 
     public SignupRequest() {}
 
+    public SignupRequest(String username, String password, String gender, String email) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.gender = gender;
+    }
 
     public String getUsername() {
         return this.username;

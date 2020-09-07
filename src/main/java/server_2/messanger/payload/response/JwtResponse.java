@@ -11,30 +11,22 @@ public class JwtResponse {
 	private Long id;
 	private String username;
 	private String email;
-	private List<String> roles;
+	private String role;
 	private String gender;
 	private String status;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime created;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime lastVisit;
-/*
-	public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
-		this.token = accessToken;
-		this.id = id;
-		this.username = username;
-		this.email = email;
-		this.roles = roles;
-	}*/
 
-	public JwtResponse(String token, Long id, String username, String email, List<String> roles,
+	public JwtResponse(String token, Long id, String username, String email, String role,
 						String gender, String status, LocalDateTime created, LocalDateTime lastVisit) {
 		this.token = token;
 		this.type = "Bearer";
 		this.id = id;
 		this.username = username;
 		this.email = email;
-		this.roles = roles;
+		this.role = role;
 		this.gender = gender;
 		this.status = status;
 		this.created = created;
@@ -81,12 +73,12 @@ public class JwtResponse {
 		this.email = email;
 	}
 
-	public List<String> getRoles() {
-		return this.roles;
+	public String getRole() {
+		return this.role;
 	}
 
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getGender() {

@@ -47,7 +47,7 @@ public class User extends BaseEntity {
     @Column(name = "status")
     private Status status;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime lastVisit;
 
 	public User() {}

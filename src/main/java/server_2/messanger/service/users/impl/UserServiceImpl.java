@@ -2,6 +2,7 @@ package server_2.messanger.service.users.impl;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
                                                 userDetails.getId(), 
                                                 userDetails.getUsername(), 
                                                 userDetails.getEmail(), 
-                                                appliedRoles,
+                                                getRoleDto(appliedRoles),
                                                 userDetails.getGender().toString(),
                                                 userDetails.getStatus().toString(),
                                                 userDetails.getCreated(),
@@ -91,6 +92,14 @@ public class UserServiceImpl implements UserService {
                              applyGender(signUpRequest.getGender()));
 		userRepository.save(user);
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    private String getRoleDto(List<String> roles) {
+        return roles.contains("ROLE_ADMIN")
+                        ? "администратор"
+                        : roles.contains("ROLE_MODERATOR")
+                                    ? "модератор"
+                                    : "пользователь";
     }
 
     private Set<Role> applyRoles(Set<String> roles) {
@@ -132,11 +141,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers() {/*
-        return getUserList().stream()
-                .map(user -> getDto(user, null))
-                .collect(Collectors.toList());*/
-        return null;
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @Override
