@@ -1,7 +1,6 @@
 package server_2.messanger.payload.response;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,6 +17,8 @@ public class JwtResponse {
 	private LocalDateTime created;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
 	private LocalDateTime lastVisit;
+
+	public JwtResponse() {}
 
 	public JwtResponse(String token, Long id, String username, String email, String role,
 						String gender, String status, LocalDateTime created, LocalDateTime lastVisit) {

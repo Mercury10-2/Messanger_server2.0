@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import server_2.messanger.domain.users.User;
+import server_2.messanger.payload.response.UserDto;
 import server_2.messanger.service.users.UserService;
 
 @RestController
-@RequestMapping("users")
+@RequestMapping("/users")
 @CrossOrigin(origins = { "http://localhost:8081" })
 public class UserController {
 
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getUsers() {
+    public List<UserDto> getUsers() {
         return service.getUsers();
     }
 

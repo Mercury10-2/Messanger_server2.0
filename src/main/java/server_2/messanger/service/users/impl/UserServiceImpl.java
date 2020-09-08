@@ -2,7 +2,6 @@ package server_2.messanger.service.users.impl;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +21,7 @@ import server_2.messanger.payload.request.LoginRequest;
 import server_2.messanger.payload.request.SignupRequest;
 import server_2.messanger.payload.response.JwtResponse;
 import server_2.messanger.payload.response.MessageResponse;
+import server_2.messanger.payload.response.UserDto;
 import server_2.messanger.repository.RoleRepository;
 import server_2.messanger.repository.UserRepository;
 import server_2.messanger.security.jwt.JwtUtils;
@@ -141,8 +141,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers() {
+        return userRepository.findAll().stream()
+                .map(user -> converToUserDto(user))
+                .collect(Collectors.toList());
+    }
+
+    private UserDto convertToUserDto(usera) {
+        return new UserDto(user.getUsername(),
+                            user.getEmail(),
+                            getRoleDto(user.getRoles),
+                            use.getGender().toString(),
+                            user.getStatus().toString(),
+                            user.getCreated(),
+                            user.getLastVisit()));
     }
 
     @Override
@@ -171,17 +183,17 @@ public class UserServiceImpl implements UserService {
 		if (userRepository.findAll().isEmpty()) {
             roles.add(roleRepository.findByName(ERole.ROLE_USER)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-            User user = new User("Аня", "ann@mail.ru", "333333", new HashSet<Role>(roles), Gender.FEMALE);
+            User user = new User("Аня", "ann@mail.ru", encoder.encode("333333"), new HashSet<Role>(roles), Gender.FEMALE);
 			userRepository.save(user);
 
             roles.add(roleRepository.findByName(ERole.ROLE_MODERATOR)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-			user = new User("Катя", "kate@mail.ru", "333333", new HashSet<Role>(roles), Gender.FEMALE);
+			user = new User("Катя", "kate@mail.ru", encoder.encode("333333"), new HashSet<Role>(roles), Gender.FEMALE);
 			userRepository.save(user);
 
             roles.add(roleRepository.findByName(ERole.ROLE_ADMIN)
                         .orElseThrow(() -> new RuntimeException("Error: Role is not found.")));
-			user = new User("Оля", "olya@mail.ru", "333333", new HashSet<Role>(roles), Gender.FEMALE);
+			user = new User("Оля", "olya@mail.ru", encoder.encode("333333"), new HashSet<Role>(roles), Gender.FEMALE);
 			userRepository.save(user);
         }
         return userRepository.findAll();
