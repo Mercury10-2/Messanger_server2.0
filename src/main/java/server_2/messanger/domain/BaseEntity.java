@@ -20,8 +20,8 @@ public class BaseEntity {
     private Long id;
 
     @CreatedDate
-    @Column(name = "created")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm")
+    @Column(name = "created", updatable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yyyy HH:mm")
     private LocalDateTime created;
 
     public BaseEntity() {}

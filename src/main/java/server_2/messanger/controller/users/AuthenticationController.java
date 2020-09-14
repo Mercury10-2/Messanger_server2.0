@@ -1,4 +1,4 @@
-package server_2.messanger.controller;
+package server_2.messanger.controller.users;
 
 import java.util.List;
 

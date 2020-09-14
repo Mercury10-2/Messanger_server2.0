@@ -1,4 +1,4 @@
-package server_2.messanger.controller;
+package server_2.messanger.controller.users;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;

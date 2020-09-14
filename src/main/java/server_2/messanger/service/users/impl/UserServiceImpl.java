@@ -1,5 +1,6 @@
 package server_2.messanger.service.users.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -141,23 +142,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getUsers() {
-        return userRepository.findAll().stream()
-                .map(user -> converToUserDto(user))
-                .collect(Collectors.toList());
-    }
-
-    private UserDto convertToUserDto(usera) {
-        return new UserDto(user.getUsername(),
-                            user.getEmail(),
-                            getRoleDto(user.getRoles),
-                            use.getGender().toString(),
-                            user.getStatus().toString(),
-                            user.getCreated(),
-                            user.getLastVisit()));
-    }
-
-    @Override
     public User getUser(String name) {
         return userRepository.findByUsername(name)
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -197,5 +181,25 @@ public class UserServiceImpl implements UserService {
 			userRepository.save(user);
         }
         return userRepository.findAll();
-	}    
+	}
+
+    @Override
+    public List<UserDto> getUsers() {
+        List<User> list = userRepository.findAll();
+        List<UserDto> response = new ArrayList<>();
+        List<String> roles = new ArrayList<>();
+        for (User user : list) {
+            roles.clear();
+            for (Role role : user.getRoles())
+                roles.add(role.getName().name());
+            response.add(new UserDto(user.getUsername(),
+                                        user.getEmail(),
+                                        getRoleDto(roles),
+                                        user.getGender().toString(),
+                                        user.getStatus().toString(),
+                                        user.getCreated(),
+                                        user.getLastVisit()));
+        }
+        return response;
+    }
 }
